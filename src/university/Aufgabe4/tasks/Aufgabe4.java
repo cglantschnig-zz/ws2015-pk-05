@@ -33,21 +33,44 @@
     Zusatzfragen:
     1. Woran erkennt man an einem Variablenzugriff, ob auf das gesamte Array, einen Teil des Arrays oder einen einzelnen
        Wert im Array zugegriffen wird?
+       Um bei n-dimensionalen arrays auf einen Wert zuzugreifen muss man n indexe angeben:
+       int test[][][] = new int[a][b][c] --> test[0][0][0]
+       bei jeder geringeren indexangabe wird auf ein array zugegriffen
     2. In keiner der zu implementierenden Methoden darf ein Array erzeugt werden. Woher kommen die benötigten Arrays?
+       die kommen vom aufrufenden Programm
     3. Wie kann man Arrays mit mehreren Dimensionen (zwei, drei oder mehr) erzeugen? Geben Sie Beispiele dafür.
+       int test[][][] = new int[45][23][4];
 */
 public class Aufgabe4 {
 
     private static int fillArray(int[][] array) {
-        return -1;  // Implementation is your task.
+        int counter = 0;
+        for (int i = 0; i < array.length; i++) {
+            for (int j = 0; j < array[i].length; j++) {
+                array[i][j] = counter++;
+            }
+        }
+        return counter;
     }
 
     private static int printArray(int[][] array) {
-        return -1;  // Implementation is your task.
+        for (int i = 0; i < array.length; i++) {
+            for (int j = 0; j < array[i].length; j++) {
+                System.out.print(array[i][j] + ", ");
+            }
+            System.out.println();
+        }
+        return array.length;
     }
 
     private static void transpose(int[][] array) {
-        // Implementation is your task.
+        for (int i = 0; i < array.length; i++) {
+            for (int j = 0; j < array[i].length; j++) {
+                int tmp = array[i][j];
+                array[i][j] = array[j][i];
+                array[j][i] = tmp;
+            }
+        }
     }
 
     // Just for testing ...
