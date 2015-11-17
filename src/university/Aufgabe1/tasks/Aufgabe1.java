@@ -25,8 +25,11 @@
 
     Zusatzfragen:
     1. Was berechnet 'rec'?
+       berechnet then ggt von 2 zahlen (mit dem euklidischen algorithmus)
     2. Warum ist es notwendig, negative Parameterwerte getrennt zu behandeln?
+       Weil der euklidische algorithmus positive teiler voraussetzt
     3. Warum ist es notwendig, 0 als Sonderfall zu behandeln?
+       da 0 keinen Teiler hat und weil wir eine endlosschleife hätten
 */
 public class Aufgabe1 {
 
@@ -52,11 +55,31 @@ public class Aufgabe1 {
 
     // Does the same as rec.
     private static int iter(int x, int y) {
-        return -1;  // Implementation is your task.
+        if (x < 0) {
+            x = x * (-1);
+        }
+        if (y < 0) {
+            y = y * (-1);
+        }
+        if (x == 0 || y == 0) {
+            return 0;
+        }
+        while(x != y) {
+            if (x > y) {
+                int swap = x;
+                x = y;
+                y = swap;
+            }
+            else {
+                y -= x;
+            }
+        }
+        return x;
     }
 
     // Just for testing ...
     public static void main(String[] args) {
         // Den Rumpf dieser Methode können Sie beliebig verändern.
+        System.out.println(iter(126, 66));
     }
 }
