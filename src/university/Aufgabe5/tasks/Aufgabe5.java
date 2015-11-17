@@ -9,21 +9,28 @@
 
     Zusatzfragen:
     1. Warum sind Überprüfungen auf den Java-Wert null im Zusammenhang mit Arrays wichtig?
+       weil zugriff auf nicht vorhandene indexe und length null pointer exceptions werfen würden
     2. Welchen Zweck erfüllt der Parameter x in sum bzw. n in primes?
+       diese Variablen beschreiben den Index auf den gearbeitet wird.
        Lassen sich rekursive Methoden auf Arrays wie sum und primes auch ohne solche Parameter leicht implementieren?
+       nein ohne index weiß man nicht wohin
     3. In welchen Fällen sind for-each-Schleifen auf Arrays wie in span vorteilhaft, in welchen nicht?
+       bei lesendem zugriff ist alles supi, schreibend oder wenn wir die indexe brauchen nicht so gut
     4. Welchen Zweck erfüllen Arrays in Methoden wie div?
+       um mehrere Rückgabewerte zu liefern
     5. Wie funktioniert primes?
+       die erste primzahl wird mit 2 initilisiert
+       daraufhin wird immer die nächste primzahl gesucht, solange bis der index gleich der größe es arrays ist
 */
 public class Aufgabe5 {
 
     // Returns the sum of all elements with an index smaller than or equal to x in the array;
     // 0 is returned if the reference to the array equals null or x is not within the index range of the array.
     private static int sum(int[] array, int x) {
-        if (array == null || (true /* TODO: modify expression; x not a valid index of array */)) {
+        if (array == null || array.length <= x || x <= 0) {
             return (0 /* TODO: modify expression */);
         }
-        return sum(array, (-1 /* TODO: modify expression*/)) + (-1 /* TODO: modify expression */);
+        return sum(array, x - 1) + array[x];
     }
 
     // Returns the non-negative difference between the largest and smallest element in the two-dimensional array;
@@ -31,34 +38,34 @@ public class Aufgabe5 {
     private static int span(int[][] array) {
         boolean empty = true;
         int min = 0, max = 0;
-        if (true /* TODO: modify expression; array is null */) {
+        if (array == null || array.length == 1) {
             return -1;
         }
         for (int[] subarray : array) {
-            if (true /* TODO: modify expression; any part of the array is null */) {
+            if (subarray == null) {
                 return -1;
             }
             for (int elem : subarray) {
                 if (empty) {
-                    min = max = (0 /* TODO: modify expression; first values */);
+                    min = max = elem;
                     empty = false;
                 } else if (elem < min) {
-                    (max /* TODO: modify expression; first values */) = elem;
+                    min = elem;
                 } else if (elem > max) {
-                    (min /* TODO: modify expression; first values */) = elem;
+                    max = elem;
                 }
             }
         }
-        return (-1 /* TODO: modify expression, the result */);
+        return max - min;
     }
 
     // Fills the array with the first array.length prime numbers;
     // assumes that each array entry at an index below n is already correctly set.
     private static void primes(int[] array, int n) {
-        if (true /* TODO: modify expression; array exists (not null), but not all entries correctly set yet */) {
-            if (n == 27 /* TODO: modify expression; no array entry correctly set */) {
+        if (array != null && n < array.length) {
+            if (n == 0) {
                 array[0] = 2;
-                primes((null /* TODO: modify expression */), (-1 /* TODO: modify expression */));
+                primes(array, n + 1);
             } else {
                 int check = array[n - 1];
                 boolean isPrime;
@@ -70,14 +77,14 @@ public class Aufgabe5 {
                     }
                 } while (! isPrime);
                 array[n] = check;
-                primes((null /* TODO: modify expression */), (-1 /* TODO: modify expression */));
+                primes(array, n + 1);
             }
         }
     }
 
     // Returns an array containing the result of the division of x by y at index 0 and the remainder at index 1.
     private static int[] div(int x, int y) {
-        return (new int[]{ 0, 1 } /* TODO: modify expression */);
+        return (new int[]{ x / y, x % y });
     }
 
     // Prints the contents of array; just for testing, nothing to do.
