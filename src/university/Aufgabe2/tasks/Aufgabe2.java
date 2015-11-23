@@ -39,9 +39,17 @@
 
     Zusatzfragen:
     1. Wodurch kommt die große Anzahl der Zeilen im Protokoll zustande?
+       weil jedes rec 2 * (i - 1)! aufgerufen wird
     2. Wie stark wirkt sich eine Änderung des ersten Arguments von 'rec' auf die Anzahl der Zeilen im Protokoll aus?
        Wie viele Zeilen würde man z.B. mit 2, 6, 10 oder 15 statt 4 bekommen?
+       2 --> 10
+       4 --> 46
+       6 --> 190
+       10 --> 3070
+       15 --> 98302
+
     3. Wie viele Aufrufe von 'rec' sind maximal zur selben Zeit aktiv?
+       i Aufrufe sind maximal
     4. Durch welche einzelne Anweisung könnte man die vier Anweisungen in der bedingten Anweisung in 'rec' ersetzen,
        ohne die Semantik des Programms zu ändern?
 */
@@ -67,6 +75,6 @@ public class Aufgabe2 {
     // Just for testing ...
     public static void main(String[] args) {
         // Den Rumpf dieser Methode können Sie beliebig verändern.
-        rec(4, 0);
+        rec(15, 0);
     }
 }
